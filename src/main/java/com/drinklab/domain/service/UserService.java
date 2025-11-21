@@ -7,13 +7,21 @@ import com.drinklab.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private GroupService groupService;
+
+
     public void create(User user) {
+
+        this.groupService.findById(user.getGroup().getId());
 
         var userExists = this.getUserByEmail(user.getEmail());
 
@@ -26,5 +34,9 @@ public class UserService {
 
     public boolean getUserByEmail(String email) {
         return userRepository.userExistsByEmail(email);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }

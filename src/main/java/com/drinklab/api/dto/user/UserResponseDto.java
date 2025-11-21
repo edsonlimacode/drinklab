@@ -14,7 +14,6 @@ public class UserResponseDto {
 
     private String name;
 
-    @JsonProperty("nick_name")
     private String nickName;
 
     private String email;
